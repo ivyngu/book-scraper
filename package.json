@@ -1,0 +1,14 @@
+{
+  "name": "book_scraper",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@notionhq/client": "^1.0.1",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.0.1",
+    "fetch": "^1.1.0",
+    "prompt-sync": "^4.2.0"
+  }
+}
