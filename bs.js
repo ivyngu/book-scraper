@@ -14,19 +14,22 @@ const prompt = prompt_();
 const prompt_url = prompt("Goodreads URL: ");
 const url = prompt_url;
 
-// get notion database: we will create a page
-// containing the scraped book info in this database
-const prompt_db = prompt("Database URL: ");
-const db = prompt_db;
-const database_id = db.slice(22, 54);
+const database_id = "778516b4cdd340d3ad745b5b13c75f82";
+//const database_id = db.slice(22, 54);
 
 // scrape goodreads for book info
 const response = await fetch(url);
 const body = await response.text();
 let $ = load(body);
-let title = $("#coverImage").attr('alt');
-let author = $(".authorName").text();
-let cover = $("#coverImage").attr('src');
+
+// loading in jsonLD info
+const jsonRaw = $("script[type='application/ld+json']")[0].children[0].data; 
+const result = JSON.parse(jsonRaw);
+const authors = result.author[0];
+
+let title = result.name;
+let author = authors.name;
+let cover = result.image;
 
 // create a page in notion database with scraped book info as properties
 (async () => {
